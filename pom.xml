@@ -15,6 +15,9 @@
         <module>shoppingmall-order</module>
         <module>shoppingmall-ware</module>
         <module>shoppingmall-coupon</module>
+        <module>renren-fast</module>
+        <module>renren-generator</module>
+        <module>shoppingmall-common</module>
     </modules>
 
 </project>
