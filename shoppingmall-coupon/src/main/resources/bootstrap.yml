@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: shoppingmall-coupon
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        namespace: cfdd0b12-8498-4d85-982d-28a896a1c36b
+        extension-configs[0]:
+          data-id: datasource.yml
+          group: dev
+          refresh: true
+        extension-configs[1]:
+          data-id: mybatis.yml
+          group: dev
+          refresh: true
+
+
+

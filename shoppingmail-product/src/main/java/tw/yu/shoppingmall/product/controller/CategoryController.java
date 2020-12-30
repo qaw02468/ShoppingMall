@@ -1,15 +1,16 @@
 package tw.yu.shoppingmall.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import tw.yu.common.utils.PageUtils;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.product.entity.CategoryEntity;
 import tw.yu.shoppingmall.product.service.CategoryService;
 
 import java.util.Arrays;
-import java.util.Map;
-
+import java.util.List;
 
 /**
  * 商品三級分類
@@ -25,13 +26,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     * 查出所有分類以及子分類
      */
-    @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
-        PageUtils page = categoryService.queryPage(params);
+    @RequestMapping("/list/tree")
+    public R list() {
+        List<CategoryEntity> entities = categoryService.listWithTree();
 
-        return R.ok().put("page", page);
+        return R.ok().put("data", entities);
     }
 
 
@@ -65,6 +66,13 @@ public class CategoryController {
         return R.ok();
     }
 
+    @RequestMapping("/update/sort")
+    public R updateSort(@RequestBody CategoryEntity[] category) {
+        categoryService.updateBatchById(Arrays.asList(category));
+
+        return R.ok();
+    }
+
     /**
      * 删除
      */
@@ -72,6 +80,7 @@ public class CategoryController {
     public R delete(@RequestBody Long[] catIds) {
         categoryService.removeByIds(Arrays.asList(catIds));
 
+        categoryService.removeMenuByIds(Arrays.asList(catIds));
         return R.ok();
     }
 

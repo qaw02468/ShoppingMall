@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: shoppingmall-product
+  cloud:
+    nacos:
+      config:
+        namespace: 26c5ac0f-7ca5-4f1c-90f7-0ae7569ae82f
+        server-addr: 127.0.0.1:8848

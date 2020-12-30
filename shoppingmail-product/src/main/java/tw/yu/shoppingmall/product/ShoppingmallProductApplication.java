@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+
 @MapperScan("tw.yu.shoppingmall.product.dao")
 @SpringBootApplication
 @EnableDiscoveryClient

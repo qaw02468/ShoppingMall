@@ -1,6 +1,7 @@
 package tw.yu.shoppingmall.coupon.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
@@ -18,11 +19,19 @@ import java.util.Map;
  * @email a89010531111@gmail.com
  * @date 2020-12-25 22:04:09
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/couponinfo")
 public class CouponInfoController {
     @Autowired
     private CouponInfoService couponInfoService;
+
+    @RequestMapping("/member/list")
+    public R memberCoupons() {
+        CouponInfoEntity couponInfoEntity = new CouponInfoEntity();
+        couponInfoEntity.setCouponName("滿100減10");
+        return R.ok().put("coupons", Arrays.asList(couponInfoEntity));
+    }
 
     /**
      * 列表

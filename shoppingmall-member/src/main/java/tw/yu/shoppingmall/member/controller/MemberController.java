@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.member.entity.MemberEntity;
+import tw.yu.shoppingmall.member.feign.CouponInfoFeign;
 import tw.yu.shoppingmall.member.service.MemberService;
 
 import java.util.Arrays;
@@ -23,6 +24,22 @@ import java.util.Map;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    CouponInfoFeign couponInfoFeign;
+
+    @RequestMapping("/coupons")
+    public R test() {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("Nick");
+
+        R memberCoupons = couponInfoFeign.memberCoupons();
+
+
+        return R.ok().put("member", memberEntity)
+                .put("coupons", memberCoupons.get("coupons"));
+
+    }
 
     /**
      * 列表

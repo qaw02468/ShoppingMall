@@ -5,6 +5,8 @@
 
     <!-- 查询用户创建的角色ID列表 -->
     <select id="queryRoleIdList" resultType="long">
-		select role_id from sys_role where create_user_id = #{createUserId} 
-	</select>
+        select role_id
+        from sys_role
+        where create_user_id = #{createUserId}
+    </select>
 </mapper>

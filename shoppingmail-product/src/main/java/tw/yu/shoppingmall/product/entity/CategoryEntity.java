@@ -1,10 +1,13 @@
 package tw.yu.shoppingmall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 商品三級分類
@@ -38,6 +41,7 @@ public class CategoryEntity implements Serializable {
     /**
      * 是否顯示[0-不顯示，1顯示]
      */
+    @TableLogic(value = "1", delval = "0")
     private Integer showStatus;
     /**
      * 排序
@@ -55,5 +59,8 @@ public class CategoryEntity implements Serializable {
      * 商品數量
      */
     private Integer productCount;
+
+    @TableField(exist = false)
+    private List<CategoryEntity> children;
 
 }
