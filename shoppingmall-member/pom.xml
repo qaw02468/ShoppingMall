@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>tw.yu.shoppingmall</groupId>
-            <artifactId>shoppingmall-coupon</artifactId>
+            <artifactId>shoppingmall-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

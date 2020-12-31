@@ -19,7 +19,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>tw.yu.shoppingmall</groupId>
             <artifactId>shoppingmall-common</artifactId>
@@ -46,6 +45,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
