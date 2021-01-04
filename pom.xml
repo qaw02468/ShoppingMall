@@ -20,9 +20,11 @@
         <module>shoppingmall-order</module>
         <module>shoppingmall-ware</module>
         <module>shoppingmall-coupon</module>
-        <module>renren-fast</module>
+        <module>shoppingmall-gateway</module>
         <module>shoppingmall-common</module>
         <module>shoppingmall-third-service</module>
+        <module>renren-fast</module>
     </modules>
+
 
 </project>

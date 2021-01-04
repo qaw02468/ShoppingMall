@@ -25,11 +25,18 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+        - id: third_service_route
+          uri: lb://shoppingmall-third-service
+          predicates:
+            - Path=/api/thirdserivce/**
+          filters:
+            - RewritePath=/api/thirdserivce/(?<segment>.*),/$\{segment}
+
         - id: admin_route
           uri: lb://renren-fast
           predicates:
             - Path=/api/**
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
-  application:
-    name: shoppingmall-gateway
+
+

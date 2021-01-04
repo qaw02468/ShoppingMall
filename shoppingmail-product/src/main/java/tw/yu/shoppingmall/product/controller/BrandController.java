@@ -1,12 +1,17 @@
 package tw.yu.shoppingmall.product.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
+import tw.yu.common.vaild.AddGroup;
+import tw.yu.common.vaild.UpdateGroup;
+import tw.yu.common.vaild.UpdateStatusGroup;
 import tw.yu.shoppingmall.product.entity.BrandEntity;
 import tw.yu.shoppingmall.product.service.BrandService;
 
+import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -18,6 +23,7 @@ import java.util.Map;
  * @email a89010531111@gmail.com
  * @date 2020-12-25 21:14:49
  */
+@Valid
 @RestController
 @RequestMapping("product/brand")
 public class BrandController {
@@ -49,7 +55,7 @@ public class BrandController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody BrandEntity brand) {
+    public R save(@Validated({AddGroup.class}) @RequestBody BrandEntity brand) {
         brandService.save(brand);
 
         return R.ok();
@@ -59,7 +65,14 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody BrandEntity brand) {
+    public R update(@Validated({UpdateGroup.class})@RequestBody BrandEntity brand) {
+        brandService.updateById(brand);
+
+        return R.ok();
+    }
+
+    @RequestMapping("/update/status")
+    public R updateStatus(@Validated({UpdateStatusGroup.class})@RequestBody BrandEntity brand) {
         brandService.updateById(brand);
 
         return R.ok();
