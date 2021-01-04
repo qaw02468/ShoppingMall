@@ -1,5 +1,6 @@
 package tw.yu.shoppingmall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -45,4 +46,6 @@ public class AttributesGroupEntity implements Serializable {
      */
     private Long catelogId;
 
+    @TableField(exist = false)
+    private Long[] cateLogPath;
 }

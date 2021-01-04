@@ -56,4 +56,5 @@ public class AttributesEntity implements Serializable {
      */
     private Integer showDesc;
 
+
 }

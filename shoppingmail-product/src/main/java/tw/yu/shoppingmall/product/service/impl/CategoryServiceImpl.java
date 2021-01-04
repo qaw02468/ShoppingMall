@@ -10,6 +10,8 @@ import tw.yu.shoppingmall.product.dao.CategoryDao;
 import tw.yu.shoppingmall.product.entity.CategoryEntity;
 import tw.yu.shoppingmall.product.service.CategoryService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,6 +50,25 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public void removeMenuByIds(List<Long> menuList) {
         baseMapper.deleteBatchIds(menuList);
+    }
+
+    @Override
+    public Long[] findCateLogPath(Long cateLogId) {
+        List<Long> path = new ArrayList<>();
+        findParentPath(cateLogId, path);
+
+        Collections.reverse(path);
+
+        return path.toArray(new Long[path.size()]);
+    }
+
+    private void findParentPath(Long cateLogId, List<Long> path) {
+        path.add(cateLogId);
+        CategoryEntity id = this.getById(cateLogId);
+
+        if (id.getParentCid() != 0) {
+            findParentPath(id.getParentCid(), path);
+        }
     }
 
     private List<CategoryEntity> getChildren(CategoryEntity root, List<CategoryEntity> all) {

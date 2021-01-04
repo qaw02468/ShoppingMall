@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.Query;
 import tw.yu.shoppingmall.product.dao.AttributesGroupDao;
@@ -26,4 +27,19 @@ public class AttributesGroupServiceImpl extends ServiceImpl<AttributesGroupDao, 
         return new PageUtils(page);
     }
 
+    @Override
+    public PageUtils queryPage(Map<String, Object> params, Long cateLogId) {
+        String key = (String) params.get("key");
+
+        System.out.println("key" + key);
+        QueryWrapper<AttributesGroupEntity> wrapper = new QueryWrapper<AttributesGroupEntity>().eq("catelog_id", cateLogId);
+        if (StringUtils.isEmpty(key)) {
+            wrapper.and((obj) -> {
+                obj.eq("attr_group_id", key).or().like("attr_group_name", key);
+            });
+        }
+        IPage<AttributesGroupEntity> page = this.page(new Query<AttributesGroupEntity>().getPage(params), wrapper);
+        return new PageUtils(page);
+
+    }
 }

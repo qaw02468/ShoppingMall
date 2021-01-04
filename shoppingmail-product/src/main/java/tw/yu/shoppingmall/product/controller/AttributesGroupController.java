@@ -6,6 +6,7 @@ import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
 import tw.yu.shoppingmall.product.service.AttributesGroupService;
+import tw.yu.shoppingmall.product.service.CategoryService;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -25,13 +26,16 @@ public class AttributesGroupController {
     @Autowired
     private AttributesGroupService attributesGroupService;
 
+    @Autowired
+    private CategoryService categoryService;
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params) {
-        PageUtils page = attributesGroupService.queryPage(params);
+    @RequestMapping("/list/{cateLogId}")
+    public R list(@RequestParam Map<String, Object> params,
+                  @PathVariable("cateLogId") Long cateLogId) {
 
+        PageUtils page = attributesGroupService.queryPage(params,cateLogId);
         return R.ok().put("page", page);
     }
 
@@ -42,6 +46,11 @@ public class AttributesGroupController {
     @RequestMapping("/info/{attrGroupId}")
     public R info(@PathVariable("attrGroupId") Long attrGroupId) {
         AttributesGroupEntity attributesGroup = attributesGroupService.getById(attrGroupId);
+
+        Long cateLogId = attributesGroup.getCatelogId();
+        Long[] cateLogPath = categoryService.findCateLogPath(cateLogId);
+
+        attributesGroup.setCateLogPath(cateLogPath);
 
         return R.ok().put("attributesGroup", attributesGroup);
     }
