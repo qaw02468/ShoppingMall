@@ -3,11 +3,13 @@ package tw.yu.shoppingmall.product.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.Query;
 import tw.yu.shoppingmall.product.dao.CategoryDao;
 import tw.yu.shoppingmall.product.entity.CategoryEntity;
+import tw.yu.shoppingmall.product.service.CategoryBrandRelationService;
 import tw.yu.shoppingmall.product.service.CategoryService;
 
 import java.util.ArrayList;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Autowired
+    private CategoryBrandRelationService categoryRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -60,6 +65,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         Collections.reverse(path);
 
         return path.toArray(new Long[path.size()]);
+    }
+
+    @Override
+    public void updateCascade(CategoryEntity category) {
+        this.updateById(category);
+        categoryRelationService.updateCategory(category.getCatId(), category.getName());
     }
 
     private void findParentPath(Long cateLogId, List<Long> path) {
