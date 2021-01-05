@@ -2,7 +2,11 @@ package tw.yu.shoppingmall.product.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import tw.yu.shoppingmall.product.entity.AttributesGroupRelationEntity;
+import tw.yu.shoppingmall.product.vo.AttributesGroupRelationVo;
+
+import java.util.List;
 
 /**
  * 屬性&屬性分組關聯
@@ -14,4 +18,5 @@ import tw.yu.shoppingmall.product.entity.AttributesGroupRelationEntity;
 @Mapper
 public interface AttributesGroupRelationDao extends BaseMapper<AttributesGroupRelationEntity> {
 
+    void deleteBatchRelation(@Param("entities") List<AttributesGroupRelationVo> entities);
 }

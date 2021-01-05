@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
-import tw.yu.shoppingmall.product.entity.AttributesEntity;
 import tw.yu.shoppingmall.product.service.AttributesService;
+import tw.yu.shoppingmall.product.vo.AttributesResponseVo;
+import tw.yu.shoppingmall.product.vo.AttributesVo;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -24,6 +25,15 @@ public class AttributesController {
     @Autowired
     private AttributesService attributesService;
 
+    @GetMapping("/{attrType}/list/{catelogId}")
+    public R baseAttributesList(@RequestParam Map<String, Object> params,
+                                @PathVariable("catelogId") Long cateLogId,
+                                @PathVariable("attrType") String type) {
+        PageUtils page = attributesService.queryBaseAttributesPage(params, cateLogId, type);
+
+        return R.ok().put("page", page);
+    }
+
     /**
      * 列表
      */
@@ -40,17 +50,18 @@ public class AttributesController {
      */
     @RequestMapping("/info/{attrId}")
     public R info(@PathVariable("attrId") Long attrId) {
-        AttributesEntity attributes = attributesService.getById(attrId);
+        AttributesResponseVo attributesResponseVo = attributesService.getAttributesInfo(attrId);
 
-        return R.ok().put("attributes", attributes);
+
+        return R.ok().put("attr", attributesResponseVo);
     }
 
     /**
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody AttributesEntity attributes) {
-        attributesService.save(attributes);
+    public R save(@RequestBody AttributesVo attributes) {
+        attributesService.saveAttributes(attributes);
 
         return R.ok();
     }
@@ -59,8 +70,8 @@ public class AttributesController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody AttributesEntity attributes) {
-        attributesService.updateById(attributes);
+    public R update(@RequestBody AttributesVo attributes) {
+        attributesService.updateAttr(attributes);
 
         return R.ok();
     }

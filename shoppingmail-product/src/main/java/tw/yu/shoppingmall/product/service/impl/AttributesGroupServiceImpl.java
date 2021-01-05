@@ -31,15 +31,21 @@ public class AttributesGroupServiceImpl extends ServiceImpl<AttributesGroupDao, 
     public PageUtils queryPage(Map<String, Object> params, Long cateLogId) {
         String key = (String) params.get("key");
 
-        System.out.println("key" + key);
-        QueryWrapper<AttributesGroupEntity> wrapper = new QueryWrapper<AttributesGroupEntity>().eq("catelog_id", cateLogId);
-        if (StringUtils.isEmpty(key)) {
+        QueryWrapper<AttributesGroupEntity> wrapper = new QueryWrapper<>();
+        if (!StringUtils.isEmpty(key)) {
             wrapper.and((obj) -> {
                 obj.eq("attr_group_id", key).or().like("attr_group_name", key);
             });
         }
-        IPage<AttributesGroupEntity> page = this.page(new Query<AttributesGroupEntity>().getPage(params), wrapper);
-        return new PageUtils(page);
 
+        if (cateLogId == 0) {
+            IPage<AttributesGroupEntity> page = this.page(new Query<AttributesGroupEntity>().getPage(params), wrapper);
+            return new PageUtils(page);
+        } else {
+            wrapper.eq("catelog_id", cateLogId);
+            IPage<AttributesGroupEntity> page = this.page(new Query<AttributesGroupEntity>().getPage(params), wrapper);
+            return new PageUtils(page);
+        }
     }
+
 }

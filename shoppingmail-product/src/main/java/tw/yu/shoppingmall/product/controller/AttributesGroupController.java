@@ -4,11 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
+import tw.yu.shoppingmall.product.entity.AttributesEntity;
 import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
+import tw.yu.shoppingmall.product.service.AttributesGroupRelationService;
 import tw.yu.shoppingmall.product.service.AttributesGroupService;
+import tw.yu.shoppingmall.product.service.AttributesService;
 import tw.yu.shoppingmall.product.service.CategoryService;
+import tw.yu.shoppingmall.product.vo.AttributesGroupRelationVo;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -28,6 +33,35 @@ public class AttributesGroupController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private AttributesService attributeServices;
+
+    @Autowired
+    private AttributesGroupRelationService attributeRelationService;
+
+    @GetMapping("/{attrgroupId}/attr/relation")
+    public R attrRelation(@PathVariable("attrgroupId") Long attrGroupId) {
+        List<AttributesEntity> attributesEntityList = attributeServices.getRelationAttr(attrGroupId);
+
+        return R.ok().put("data", attributesEntityList);
+    }
+
+    @PostMapping("/attr/relation")
+    public R addRelation(@RequestBody List<AttributesGroupRelationVo> vos) {
+
+        attributeRelationService.saveBatch(vos);
+
+        return R.ok();
+    }
+
+    @GetMapping("/{attrgroupId}/noattr/relation")
+    public R attrNoRelation(@PathVariable("attrgroupId") Long attrGroupId,
+                            @RequestParam Map<String, Object> params) {
+        PageUtils page = attributeServices.getNoRelationAttr(params, attrGroupId);
+        return R.ok().put("page", page);
+    }
+
     /**
      * 列表
      */
@@ -35,7 +69,7 @@ public class AttributesGroupController {
     public R list(@RequestParam Map<String, Object> params,
                   @PathVariable("cateLogId") Long cateLogId) {
 
-        PageUtils page = attributesGroupService.queryPage(params,cateLogId);
+        PageUtils page = attributesGroupService.queryPage(params, cateLogId);
         return R.ok().put("page", page);
     }
 
@@ -61,6 +95,14 @@ public class AttributesGroupController {
     @RequestMapping("/save")
     public R save(@RequestBody AttributesGroupEntity attributesGroup) {
         attributesGroupService.save(attributesGroup);
+
+        return R.ok();
+    }
+
+
+    @PostMapping("/attr/relation/delete")
+    public R deleteRelation(@RequestBody AttributesGroupRelationVo[] vos) {
+        attributeServices.deleteRelation(vos);
 
         return R.ok();
     }
