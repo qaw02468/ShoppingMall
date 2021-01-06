@@ -32,6 +32,8 @@ public class AttributesVo {
     /**
      * 屬性類型[0-銷售屬性，1-基本屬性，2-既是銷售屬性又是基本屬性]
      */
+    private Integer valueType;
+
     private Integer attrType;
     /**
      * 啟用狀態[0 -禁用，1 -啟用]

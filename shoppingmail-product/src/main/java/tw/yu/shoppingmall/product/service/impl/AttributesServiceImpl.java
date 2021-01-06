@@ -80,10 +80,13 @@ public class AttributesServiceImpl extends ServiceImpl<AttributesDao, Attributes
         if (cateLogId != 0) {
             queryWrapper.eq("catelog_id", cateLogId);
         }
+
         String key = (String) params.get("key");
-        if (StringUtils.isEmpty(key)) {
+        if (!StringUtils.isEmpty(key)) {
             queryWrapper.and((wrapper) -> {
-                wrapper.eq("attr_id", key).or().like("attr_name", key);
+                wrapper.eq("attr_id", key)
+                        .or()
+                        .like("attr_name", key);
             });
         }
 

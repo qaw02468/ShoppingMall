@@ -3,7 +3,9 @@ package tw.yu.shoppingmall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
+import tw.yu.shoppingmall.product.vo.AttrGroupWithAttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,5 +20,8 @@ public interface AttributesGroupService extends IService<AttributesGroupEntity> 
     PageUtils queryPage(Map<String, Object> params);
 
     PageUtils queryPage(Map<String, Object> params, Long cateLogId);
+
+    List<AttrGroupWithAttrVo> getAttributeGroupWithAttributeByCateLogId(Long cateLogId);
+
 }
 

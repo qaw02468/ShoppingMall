@@ -10,6 +10,7 @@ import tw.yu.shoppingmall.product.dao.ProductAttributesValueDao;
 import tw.yu.shoppingmall.product.entity.ProductAttributesValueEntity;
 import tw.yu.shoppingmall.product.service.ProductAttributesValueService;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +25,11 @@ public class ProductAttributesValueServiceImpl extends ServiceImpl<ProductAttrib
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public void saveProductAttr(List<ProductAttributesValueEntity> collect) {
+        this.saveBatch(collect);
     }
 
 }

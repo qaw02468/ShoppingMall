@@ -6,6 +6,7 @@ import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.product.entity.SpuInfoEntity;
 import tw.yu.shoppingmall.product.service.SpuInfoService;
+import tw.yu.shoppingmall.product.vo.SpuSaveVo;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -49,8 +50,8 @@ public class SpuInfoController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody SpuInfoEntity spuInfo) {
-        spuInfoService.save(spuInfo);
+    public R save(@RequestBody SpuSaveVo spuInfo) {
+        spuInfoService.saveSpuInfo(spuInfo);
 
         return R.ok();
     }

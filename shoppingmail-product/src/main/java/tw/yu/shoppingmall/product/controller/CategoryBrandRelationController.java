@@ -5,12 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
+import tw.yu.shoppingmall.product.entity.BrandEntity;
 import tw.yu.shoppingmall.product.entity.CategoryBrandRelationEntity;
 import tw.yu.shoppingmall.product.service.CategoryBrandRelationService;
+import tw.yu.shoppingmall.product.vo.BrandVo;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 /**
@@ -33,6 +36,22 @@ public class CategoryBrandRelationController {
                 new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));
 
         return R.ok().put("data", data);
+    }
+
+    @GetMapping("/brands/list")
+    public R relationBrandsList(@RequestParam(value = "catId", required = true) Long catId) {
+        List<BrandEntity> vos = categoryBrandRelationService.getBrandsByCatId(catId);
+
+        List<BrandVo> collect = vos.stream()
+                .map(item -> {
+                    BrandVo brandVo = new BrandVo();
+                    brandVo.setBrandId(item.getBrandId());
+                    brandVo.setBrandName(item.getName());
+
+                    return brandVo;
+                }).collect(Collectors.toList());
+
+        return R.ok().put("data", collect);
     }
 
 

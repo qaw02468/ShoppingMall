@@ -10,6 +10,7 @@ import tw.yu.shoppingmall.product.service.AttributesGroupRelationService;
 import tw.yu.shoppingmall.product.service.AttributesGroupService;
 import tw.yu.shoppingmall.product.service.AttributesService;
 import tw.yu.shoppingmall.product.service.CategoryService;
+import tw.yu.shoppingmall.product.vo.AttrGroupWithAttrVo;
 import tw.yu.shoppingmall.product.vo.AttributesGroupRelationVo;
 
 import java.util.Arrays;
@@ -71,6 +72,14 @@ public class AttributesGroupController {
 
         PageUtils page = attributesGroupService.queryPage(params, cateLogId);
         return R.ok().put("page", page);
+    }
+
+    @GetMapping("/{catelogId}/withattr")
+    public R getAttributeGroupWithAttribute(@PathVariable("catelogId") Long cateLogId) {
+
+        List<AttrGroupWithAttrVo> vos = attributesGroupService.getAttributeGroupWithAttributeByCateLogId(cateLogId);
+
+        return R.ok().put("data", vos);
     }
 
 

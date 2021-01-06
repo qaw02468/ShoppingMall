@@ -10,7 +10,9 @@ import tw.yu.shoppingmall.product.dao.SpuImagesDao;
 import tw.yu.shoppingmall.product.entity.SpuImagesEntity;
 import tw.yu.shoppingmall.product.service.SpuImagesService;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("spuImagesService")
@@ -26,4 +28,18 @@ public class SpuImagesServiceImpl extends ServiceImpl<SpuImagesDao, SpuImagesEnt
         return new PageUtils(page);
     }
 
+    @Override
+    public void saveImages(Long id, List<String> images) {
+        if (images != null && images.size() > 0) {
+            List<SpuImagesEntity> collect = images.stream().map(img -> {
+                SpuImagesEntity spuImagesEntity = new SpuImagesEntity();
+                spuImagesEntity.setId(id);
+                spuImagesEntity.setImgUrl(img);
+
+                return spuImagesEntity;
+            }).collect(Collectors.toList());
+
+            this.saveBatch(collect);
+        }
+    }
 }

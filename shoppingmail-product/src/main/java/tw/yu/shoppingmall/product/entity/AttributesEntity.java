@@ -31,6 +31,8 @@ public class AttributesEntity implements Serializable {
      * 是否需要檢索[0-不需要，1-需要]
      */
     private Integer searchType;
+
+    private Integer valueType;
     /**
      * 屬性圖標
      */
