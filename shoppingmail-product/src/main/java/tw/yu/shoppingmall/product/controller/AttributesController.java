@@ -4,11 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
+import tw.yu.shoppingmall.product.entity.ProductAttributesValueEntity;
 import tw.yu.shoppingmall.product.service.AttributesService;
+import tw.yu.shoppingmall.product.service.ProductAttributesValueService;
 import tw.yu.shoppingmall.product.vo.AttributesResponseVo;
 import tw.yu.shoppingmall.product.vo.AttributesVo;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +27,24 @@ import java.util.Map;
 public class AttributesController {
     @Autowired
     private AttributesService attributesService;
+
+    @Autowired
+    private ProductAttributesValueService productAttributesValueService;
+
+    @GetMapping("/base/listforspu/{spuId}")
+    public R baseAttrlistforspu(@PathVariable("spuId") Long spuId) {
+
+        List<ProductAttributesValueEntity> entities = productAttributesValueService.baseAttrlistForSpu(spuId);
+
+        return R.ok().put("data", entities);
+    }
+
+    @PostMapping("/update/{spuId}")
+    public R updateSpuAttr(@PathVariable("spuId") Long spuId,
+                           @RequestBody List<ProductAttributesValueEntity> entities) {
+        productAttributesValueService.updateSpuAttr(spuId, entities);
+        return R.ok();
+    }
 
     @GetMapping("/{attrType}/list/{catelogId}")
     public R baseAttributesList(@RequestParam Map<String, Object> params,

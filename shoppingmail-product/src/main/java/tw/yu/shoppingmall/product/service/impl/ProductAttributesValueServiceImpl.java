@@ -12,6 +12,7 @@ import tw.yu.shoppingmall.product.service.ProductAttributesValueService;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Service("productAttributesValueService")
@@ -32,4 +33,21 @@ public class ProductAttributesValueServiceImpl extends ServiceImpl<ProductAttrib
         this.saveBatch(collect);
     }
 
+    @Override
+    public List<ProductAttributesValueEntity> baseAttrlistForSpu(Long spuId) {
+        return this.baseMapper.selectList(new QueryWrapper<ProductAttributesValueEntity>().eq("spu_id", spuId));
+    }
+
+    @Override
+    public void updateSpuAttr(Long spuId, List<ProductAttributesValueEntity> entities) {
+
+        this.baseMapper.delete(new QueryWrapper<ProductAttributesValueEntity>()
+                .eq("spu_id", spuId));
+
+        List<ProductAttributesValueEntity> collect = entities.stream()
+                .peek(item -> item.setSpuId(spuId))
+                .collect(Collectors.toList());
+
+        this.saveBatch(collect);
+    }
 }
