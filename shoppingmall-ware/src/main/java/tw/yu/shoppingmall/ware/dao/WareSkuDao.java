@@ -16,4 +16,6 @@ import tw.yu.shoppingmall.ware.entity.WareSkuEntity;
 public interface WareSkuDao extends BaseMapper<WareSkuEntity> {
 
     void addStock(@Param("skuId") Long skuId, @Param("wareId") Long wareId, @Param("skuNum") Integer skuNum);
+
+    Long getSkuStock(@Param("skuId") Long skuId);
 }

@@ -65,14 +65,14 @@ public class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@Validated({UpdateGroup.class})@RequestBody BrandEntity brand) {
+    public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand) {
         brandService.updateByDetail(brand);
 
         return R.ok();
     }
 
     @RequestMapping("/update/status")
-    public R updateStatus(@Validated({UpdateStatusGroup.class})@RequestBody BrandEntity brand) {
+    public R updateStatus(@Validated({UpdateStatusGroup.class}) @RequestBody BrandEntity brand) {
         brandService.updateById(brand);
 
         return R.ok();

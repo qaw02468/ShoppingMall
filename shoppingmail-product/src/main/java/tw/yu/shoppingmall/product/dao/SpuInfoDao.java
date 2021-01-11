@@ -2,6 +2,7 @@ package tw.yu.shoppingmall.product.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import tw.yu.shoppingmall.product.entity.SpuInfoEntity;
 
 /**
@@ -14,4 +15,5 @@ import tw.yu.shoppingmall.product.entity.SpuInfoEntity;
 @Mapper
 public interface SpuInfoDao extends BaseMapper<SpuInfoEntity> {
 
+    void updateSpuStatus(Long spuId, @Param("code") int code);
 }

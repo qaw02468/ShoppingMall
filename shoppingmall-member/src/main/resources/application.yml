@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.157.128:3306/shoppingmall_user_manage
+    url: jdbc:mysql://192.168.157.129:3306/shoppingmall_user_manage
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:

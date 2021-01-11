@@ -19,4 +19,9 @@
         WHERE sku_id = #{skuId}
           AND ware_id = ${wareId}
     </insert>
+    <select id="getSkuStock" resultType="java.lang.Long">
+        SELECT SUM(stock - stock_locked)
+        FROM `shoppingmall_ware_manage.ware_sku`
+        WHERE sku_id = #{skuId}
+    </select>
 </mapper>

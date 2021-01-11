@@ -6,8 +6,10 @@ package tw.yu.common.exception;
  */
 
 public enum ExceptionCode {
-    UNKNOW_EXCEPTION(10000,"系統未知異常"),
-    VAILD_EXCEPTION(10001,"參數格式校驗失敗");
+    UNKNOW_EXCEPTION(10000, "系統未知異常"),
+    VAILD_EXCEPTION(10001, "參數格式校驗失敗"),
+    PRODUCT_UP_EXCEPTION(11000, "商品上架異常");
+
 
     private int code;
     private String msg;

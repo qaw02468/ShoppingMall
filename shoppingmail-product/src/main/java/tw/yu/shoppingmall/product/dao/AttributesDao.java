@@ -2,7 +2,10 @@ package tw.yu.shoppingmall.product.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import tw.yu.shoppingmall.product.entity.AttributesEntity;
+
+import java.util.List;
 
 /**
  * 商品屬性
@@ -14,4 +17,5 @@ import tw.yu.shoppingmall.product.entity.AttributesEntity;
 @Mapper
 public interface AttributesDao extends BaseMapper<AttributesEntity> {
 
+    List<Long> selectSearchAttrIdList(@Param("attrIdList") List<Long> attrIdList);
 }

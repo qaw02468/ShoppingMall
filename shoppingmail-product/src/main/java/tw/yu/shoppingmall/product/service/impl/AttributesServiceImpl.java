@@ -240,4 +240,11 @@ public class AttributesServiceImpl extends ServiceImpl<AttributesDao, Attributes
         return new PageUtils(page);
     }
 
+    @Override
+    public List<Long> selectSearchAttrs(List<Long> attrIdList) {
+
+        return baseMapper.selectSearchAttrIdList(attrIdList);
+
+    }
+
 }

@@ -48,8 +48,8 @@ public class BrandEntity implements Serializable {
     /**
      * 顯示狀態[0-不顯示；1-顯示]
      */
-    @NotNull(groups = {AddGroup.class,UpdateGroup.class})
-    @ListValue(value = {0, 1}, groups = {AddGroup.class,UpdateGroup.class})
+    @NotNull(groups = {AddGroup.class, UpdateGroup.class})
+    @ListValue(value = {0, 1}, groups = {AddGroup.class, UpdateGroup.class})
     private Integer showStatus;
     /**
      * 檢索首字母
