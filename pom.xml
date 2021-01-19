@@ -15,7 +15,8 @@
 	</properties>
 
 	<modules>
-		<module>shoppingmail-product</module>
+		<module>shoppingmall-product</module>
+		<module>shoppingmall-search</module>
 		<module>shoppingmall-member</module>
 		<module>shoppingmall-order</module>
 		<module>shoppingmall-ware</module>

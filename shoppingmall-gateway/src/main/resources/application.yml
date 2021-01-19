@@ -43,6 +43,11 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
 
+        - id: shoppingmall-host-router
+          uri: lb://shoppingmall-product
+          predicates:
+            - Host=shoppingmall.com
+
 
 
 
