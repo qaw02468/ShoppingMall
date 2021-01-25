@@ -2,25 +2,22 @@ package tw.yu.shoppingmall.product.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import tw.yu.common.utils.PageUtils;
-import tw.yu.shoppingmall.product.entity.BrandEntity;
+import tw.yu.shoppingmall.product.entity.SpuImagesEntity;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * 品牌
+ * spu圖片
  *
  * @author a8901053
  * @email a89010531111@gmail.com
- * @date 2020-12-25 21:14:49
+ * @date 2020-12-25 17:59:16
  */
-
-public interface BrandService extends IService<BrandEntity> {
+public interface SpuImagesService extends IService<SpuImagesEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    void updateByDetail(BrandEntity brand);
-
-    List<BrandEntity> getBrandsByIds(List<Long> brandIds);
+    void saveImages(Long id, List<String> images);
 }
 

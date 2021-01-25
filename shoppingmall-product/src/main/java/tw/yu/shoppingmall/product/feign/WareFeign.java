@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author - a89010531111@gmail.com
  */
-@FeignClient("Shoppingmall-ware")
+@FeignClient("shoppingmall-ware")
 public interface WareFeign {
 
     @PostMapping("/ware/waresku/hasstock")

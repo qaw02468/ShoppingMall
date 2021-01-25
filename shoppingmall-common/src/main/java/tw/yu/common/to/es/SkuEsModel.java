@@ -27,6 +27,7 @@ public class SkuEsModel {
     private String catalogName;
     private List<Attrs> attrs;
 
+    @Data
     public static class Attrs {
 
         private Long attrId;

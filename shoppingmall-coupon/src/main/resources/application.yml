@@ -3,10 +3,13 @@ server:
 
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.157.129:3306/shoppingmall_sell_manage
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://192.168.157.129:3306/shoppingmall_sell_manage
+      username: root
+      password: root
+
   cloud:
     nacos:
       discovery:
@@ -19,3 +22,8 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+
+logging:
+  level:
+    tw.yu.shoppingmall: debug
+

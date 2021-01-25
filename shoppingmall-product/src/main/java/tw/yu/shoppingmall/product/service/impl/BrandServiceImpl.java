@@ -13,6 +13,7 @@ import tw.yu.shoppingmall.product.entity.BrandEntity;
 import tw.yu.shoppingmall.product.service.BrandService;
 import tw.yu.shoppingmall.product.service.CategoryBrandRelationService;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -45,6 +46,12 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
             categoryBrandRelationService.updateBrand(brand.getBrandId(), brand.getName());
         }
 
+    }
+
+    @Override
+    public List<BrandEntity> getBrandsByIds(List<Long> brandIds) {
+
+        return baseMapper.selectList(new QueryWrapper<BrandEntity>().in("brand_id", brandIds));
     }
 
 }

@@ -1,6 +1,5 @@
 package tw.yu.shoppingmall.search.service;
 
-import org.springframework.stereotype.Service;
 import tw.yu.common.to.es.SkuEsModel;
 
 import java.io.IOException;

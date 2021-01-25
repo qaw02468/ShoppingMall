@@ -33,6 +33,7 @@ public class ProductSaveServiceImpl implements ProductSaveService {
     @Override
     public boolean productStatusUp(List<SkuEsModel> skuEsModels) throws IOException {
         BulkRequest bulkRequest = new BulkRequest();
+
         for (SkuEsModel esSkuModel : skuEsModels) {
             IndexRequest indexRequest = new IndexRequest(EsConstant.PRODUCT_INDEX);
             indexRequest.id(esSkuModel.getSkuId().toString());
@@ -44,9 +45,13 @@ public class ProductSaveServiceImpl implements ProductSaveService {
 
         BulkResponse bulkResponse = restHighLevelClient.bulk(bulkRequest, ElasticSearchConfig.COMMON_OPTIONS);
 
-        boolean result = bulkResponse.hasFailures();
-        List<String> collect = Arrays.stream(bulkResponse.getItems()).map(BulkItemResponse::getId).collect(Collectors.toList());
-        log.error("商品上架完成, {}", collect);
-        return result;
+        boolean hasFailures = bulkResponse.hasFailures();
+        if (hasFailures) {
+            List<String> collect = Arrays.stream(bulkResponse.getItems())
+                    .map(BulkItemResponse::getId)
+                    .collect(Collectors.toList());
+            log.error("商品上架完成, {}", collect);
+        }
+        return hasFailures;
     }
 }
