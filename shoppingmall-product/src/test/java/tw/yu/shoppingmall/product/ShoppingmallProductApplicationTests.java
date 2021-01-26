@@ -7,10 +7,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import tw.yu.shoppingmall.product.dao.AttributesGroupDao;
+import tw.yu.shoppingmall.product.dao.SkuSaleAttributesValueDao;
 import tw.yu.shoppingmall.product.entity.BrandEntity;
 import tw.yu.shoppingmall.product.service.BrandService;
+import tw.yu.shoppingmall.product.service.SkuInfoService;
+import tw.yu.shoppingmall.product.vo.SkuItemVo;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,11 +25,24 @@ class ShoppingmallProductApplicationTests {
     @Autowired
     private BrandService brandService;
 
+    @Autowired
+    private AttributesGroupDao attributesGroupDao;
+
+    @Autowired
+    private SkuSaleAttributesValueDao skuSaleAttributesValueDao;
+
+    @Autowired
+    private SkuInfoService skuInfoService;
     @Test
-    void contextLoads() {
+    public void contextLoads() {
 
         List<BrandEntity> list = brandService.list(new QueryWrapper<BrandEntity>().eq("brand_id", 1L));
         list.forEach(System.out::println);
     }
 
+    @Test
+    public void test() throws ExecutionException, InterruptedException {
+        SkuItemVo item = skuInfoService.item(1L);
+        System.out.println(item);
+    }
 }

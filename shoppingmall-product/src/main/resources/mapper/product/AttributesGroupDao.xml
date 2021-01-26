@@ -13,5 +13,29 @@
         <result property="catelogId" column="catelog_id"/>
     </resultMap>
 
+    <resultMap id="spuItemAttrGroupVo" type="tw.yu.shoppingmall.product.vo.SkuItemSaleAttrGroupVo">
+        <result property="groupName" column="attr_group_name"/>
+        <collection property="attrs" ofType="tw.yu.shoppingmall.product.vo.Attr">
+            <result column="attr_name" property="attrName"/>
+            <result column="attr_value" property="attrValue"/>
+        </collection>
+
+    </resultMap>
+    <select id="getAttributeGroupWithAttributeBySpuId"
+            resultMap="spuItemAttrGroupVo">
+        SELECT pav.`spu_id`,
+               ag.`attr_group_name`,
+               ag.`attr_group_id`,
+               aar.`attr_id`,
+               attr.`attr_name`,
+               pav.`attr_value`
+        FROM `product_attributes_group` ag
+                 LEFT JOIN `product_attributes_group_relation` aar ON aar.`attr_group_id` = ag.`attr_group_id`
+                 LEFT JOIN `product_attributes` attr ON attr.`attr_id` = aar.`attr_id`
+                 LEFT JOIN `product_product_attributes_value` pav ON pav.`attr_id` = attr.`attr_id`
+        WHERE ag.catelog_id = #{catalogId}
+          AND pav.`spu_id` = #{spuId}
+    </select>
+
 
 </mapper>

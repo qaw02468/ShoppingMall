@@ -13,5 +13,26 @@
         <result property="attrSort" column="attr_sort"/>
     </resultMap>
 
+    <resultMap id="SkuItemSaleAttrVo" type="tw.yu.shoppingmall.product.vo.SkuItemSaleAttrVo">
+        <result column="attr_id" property="attrId"/>
+        <result column="attr_name" property="attrName"/>
+        <collection property="attrValues" ofType="tw.yu.shoppingmall.product.vo.AttrValueWithSkuIdVo">
+            <result column="attr_values" property="attrValue"/>
+            <result column="sku_ids" property="skuIds"/>
+        </collection>
+    </resultMap>
+    <select id="getSaleAttrsBySpuId" resultMap="SkuItemSaleAttrVo">
+        SELECT ssav.attr_id    attr_id,
+               ssav.attr_name  attr_name,
+               ssav.attr_value attr_values,
+               group_concat(distinct info.sku_id) sku_ids
+        FROM `product_sku_info` info
+                 LEFT JOIN `product_sku_sale_attributes_value` ssav
+                           ON ssav.sku_id = info.`sku_id`
+        where info.spu_id = #{spuId}
+        GROUP BY ssav.attr_id, ssav.attr_name, ssav.attr_value
+
+    </select>
+
 
 </mapper>

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
 import tw.yu.shoppingmall.product.vo.AttrGroupWithAttrVo;
+import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrGroupVo;
+import tw.yu.shoppingmall.product.vo.SkuItemVo;
 
 import java.util.List;
 import java.util.Map;
@@ -23,5 +25,6 @@ public interface AttributesGroupService extends IService<AttributesGroupEntity> 
 
     List<AttrGroupWithAttrVo> getAttributeGroupWithAttributeByCateLogId(Long cateLogId);
 
+    List<SkuItemSaleAttrGroupVo> getAttributeGroupWithAttributeBySpuId(Long spuId, Long catalogId);
 }
 

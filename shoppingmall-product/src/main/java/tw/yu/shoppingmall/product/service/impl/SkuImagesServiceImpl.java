@@ -10,6 +10,7 @@ import tw.yu.shoppingmall.product.dao.SkuImagesDao;
 import tw.yu.shoppingmall.product.entity.SkuImagesEntity;
 import tw.yu.shoppingmall.product.service.SkuImagesService;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -24,6 +25,13 @@ public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesDao, SkuImagesEnt
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<SkuImagesEntity> getImagesBySkuId(Long skuId) {
+        SkuImagesDao baseMapper = this.baseMapper;
+
+        return baseMapper.selectList(new QueryWrapper<SkuImagesEntity>().eq("sku_id", skuId));
     }
 
 }

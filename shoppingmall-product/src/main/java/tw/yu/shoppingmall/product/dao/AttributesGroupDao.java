@@ -2,7 +2,11 @@ package tw.yu.shoppingmall.product.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
+import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrGroupVo;
+
+import java.util.List;
 
 /**
  * 屬性分組
@@ -14,4 +18,5 @@ import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
 @Mapper
 public interface AttributesGroupDao extends BaseMapper<AttributesGroupEntity> {
 
+    List<SkuItemSaleAttrGroupVo> getAttributeGroupWithAttributeBySpuId(@Param("spuId") Long spuId, @Param("catalogId") Long catalogId);
 }

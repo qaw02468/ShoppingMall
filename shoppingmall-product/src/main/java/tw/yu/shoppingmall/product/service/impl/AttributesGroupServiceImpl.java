@@ -15,6 +15,8 @@ import tw.yu.shoppingmall.product.entity.AttributesGroupEntity;
 import tw.yu.shoppingmall.product.service.AttributesGroupService;
 import tw.yu.shoppingmall.product.service.AttributesService;
 import tw.yu.shoppingmall.product.vo.AttrGroupWithAttrVo;
+import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrGroupVo;
+import tw.yu.shoppingmall.product.vo.SkuItemVo;
 
 import java.util.List;
 import java.util.Map;
@@ -74,6 +76,15 @@ public class AttributesGroupServiceImpl extends ServiceImpl<AttributesGroupDao, 
         }).collect(Collectors.toList());
 
         return collect;
+    }
+
+    @Override
+    public List<SkuItemSaleAttrGroupVo> getAttributeGroupWithAttributeBySpuId(Long spuId, Long catalogId) {
+
+        AttributesGroupDao baseMapper = this.baseMapper;
+        List<SkuItemSaleAttrGroupVo> vos = baseMapper.getAttributeGroupWithAttributeBySpuId(spuId,catalogId);
+
+        return vos;
     }
 
 }

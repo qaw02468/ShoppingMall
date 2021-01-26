@@ -46,12 +46,13 @@ spring:
         - id: shoppingmall-host-router
           uri: lb://shoppingmall-product
           predicates:
-            - Host=shoppingmall.com
+            - Host=shoppingmall.com,item.shoppingmall.com
 
         - id: shoppingmall-search-router
           uri: lb://shoppingmall-search
           predicates:
             - Host=search.shoppingmall.com
+
 
 
 

@@ -3,7 +3,9 @@ package tw.yu.shoppingmall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.shoppingmall.product.entity.SkuSaleAttributesValueEntity;
+import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,5 +18,7 @@ import java.util.Map;
 public interface SkuSaleAttributesValueService extends IService<SkuSaleAttributesValueEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    List<SkuItemSaleAttrVo> getSaleAttrsBySpuId(Long spuId);
 }
 
