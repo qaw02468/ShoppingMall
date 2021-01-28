@@ -33,6 +33,7 @@ class ShoppingmallProductApplicationTests {
 
     @Autowired
     private SkuInfoService skuInfoService;
+
     @Test
     public void contextLoads() {
 

@@ -241,7 +241,7 @@
     <nav>
         <div class="nav_min">
             <div class="nav_top">
-                <div class="nav_top_one"><a href="/static/item/#"><img src="/static/item/img/111.png"/></a></div>
+                <div class="nav_top_one"><a href="http://shoppingmall.com"><img src="/static/item/img/111.png"/></a></div>
                 <div class="nav_top_two"><input type="text"/>
                     <button>搜索</button>
                 </div>
@@ -1248,7 +1248,7 @@
         <a href="/static/item/##"> 互聯網出版許可證編號新出網證(京)字150號</a>|
         <a href="/static/item/##"> 出版物經營許可證</a>|
         <a href="/static/item/##"> 網絡文化經營許可證京網文 </a>|
-        <a href="/static/item/##">[2014]2148-348號 </a>|
+        <a href="/static/item/##">[2021]2148-348號 </a>|
         <a href="/static/item/##"> 違法和不良信息舉報電話 </a>|
         <a href="/static/item/##">：4006561155 </a>
     </p>
@@ -1290,16 +1290,16 @@
         });
 
         var filterEle = skus[0];
-        for(var i = 1; i< skus.length;i ++){
+        for (var i = 1; i < skus.length; i++) {
             filterEle = $(filterEle).filter(skus[i]);
         }
         console.log(filterEle[0])
 
         location.href = "http://item.shoppingmall.com/" + filterEle[0] + ".html";
     });
-    $(function (){
-        $(".sku_attr_value").parent().css({"border":"solid 1px #CCC"});
-        $("a[class='sku_attr_value checked']").parent().css({"border":"solid 1px red"});
+    $(function () {
+        $(".sku_attr_value").parent().css({"border": "solid 1px #CCC"});
+        $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
     })
 </script>
 

@@ -21,7 +21,7 @@ public class SkuEsModel {
     private Boolean hasStock;
     private Long hotScore;
     private Long brandId;
-    private String  brandName;
+    private String brandName;
     private String brandImg;
     private Long catalogId;
     private String catalogName;

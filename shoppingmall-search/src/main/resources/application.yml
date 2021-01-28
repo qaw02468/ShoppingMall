@@ -6,9 +6,12 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-
   thymeleaf:
     cache: false
+  redis:
+    host: 192.168.157.129
+  session:
+    store-type: redis
 
   application:
     name: shoppingmall-search

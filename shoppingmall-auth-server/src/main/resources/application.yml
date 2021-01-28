@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: shoppingmall-auth-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  thymeleaf:
+    cache: false
+  redis:
+    host: 192.168.157.129
+  session:
+    store-type: redis
+    timeout: 60m
+server:
+  port: 20000

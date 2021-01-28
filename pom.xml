@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>tw.yu.shoppingmall</groupId>
-	<artifactId>shoppingmall</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>shoppingmall</name>
-	<packaging>pom</packaging>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tw.yu.shoppingmall</groupId>
+    <artifactId>shoppingmall</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>shoppingmall</name>
+    <packaging>pom</packaging>
 
+    <properties>
+        <java.version>11</java.version>
+        <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
+    </properties>
 
-	<properties>
-		<java.version>11</java.version>
-		<spring-cloud.version>Hoxton.SR9</spring-cloud.version>
-	</properties>
-
-	<modules>
-		<module>shoppingmall-product</module>
-		<module>shoppingmall-search</module>
-		<module>shoppingmall-member</module>
-		<module>shoppingmall-order</module>
-		<module>shoppingmall-ware</module>
-		<module>shoppingmall-coupon</module>
-		<module>shoppingmall-gateway</module>
-		<module>shoppingmall-common</module>
-		<module>shoppingmall-third-service</module>
-		<module>renren-fast</module>
-	</modules>
+    <modules>
+        <module>shoppingmall-product</module>
+        <module>shoppingmall-search</module>
+        <module>shoppingmall-member</module>
+        <module>shoppingmall-order</module>
+        <module>shoppingmall-ware</module>
+        <module>shoppingmall-coupon</module>
+        <module>shoppingmall-gateway</module>
+        <module>shoppingmall-common</module>
+        <module>shoppingmall-third-service</module>
+        <module>shoppingmall-auth-server</module>
+        <module>renren-fast</module>
+    </modules>
 
 
 </project>

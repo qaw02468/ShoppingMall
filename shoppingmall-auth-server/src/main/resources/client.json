@@ -1,0 +1,16 @@
+{
+  "web": {
+    "client_id": "19631340497-3p04c6i7p37jm10qookn6ah8fvahmfcd.apps.googleusercontent.com",
+    "project_id": "shoppingmall-303007",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_secret": "mtWt9ynsl3Wf2osVnIMgE8VI",
+    "redirect_uris": [
+      "http://auth.shoppingmall.com/oauth2.0/google/success"
+    ],
+    "javascript_origins": [
+      "http://shoppingmall.com"
+    ]
+  }
+}

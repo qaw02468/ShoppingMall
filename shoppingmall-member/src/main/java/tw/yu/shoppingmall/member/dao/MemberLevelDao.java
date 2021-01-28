@@ -14,4 +14,5 @@ import tw.yu.shoppingmall.member.entity.MemberLevelEntity;
 @Mapper
 public interface MemberLevelDao extends BaseMapper<MemberLevelEntity> {
 
+    MemberLevelEntity getDefaultLevel();
 }

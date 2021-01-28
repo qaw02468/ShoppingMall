@@ -2,11 +2,17 @@ package tw.yu.shoppingmall.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.yu.common.exception.ExceptionCode;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.member.entity.MemberEntity;
+import tw.yu.shoppingmall.member.exception.PhoneExistException;
+import tw.yu.shoppingmall.member.exception.UserNameExistException;
 import tw.yu.shoppingmall.member.feign.CouponInfoFeign;
 import tw.yu.shoppingmall.member.service.MemberService;
+import tw.yu.shoppingmall.member.vo.MemberLoginVo;
+import tw.yu.shoppingmall.member.vo.MemberRegisterVo;
+import tw.yu.shoppingmall.member.vo.SocialUser;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -92,4 +98,38 @@ public class MemberController {
         return R.ok();
     }
 
+    @PostMapping("/login")
+    public R login(@RequestBody MemberLoginVo vo){
+        MemberEntity memberEntity = memberService.login(vo);
+        if(memberEntity != null){
+            return R.ok().setData(memberEntity);
+        }else {
+            return R.error(ExceptionCode.LOGINACTT_PASSWORD_ERROR.getCode(), ExceptionCode.LOGINACTT_PASSWORD_ERROR.getMsg());
+        }
+    }
+
+
+    @PostMapping("/oauth2/login")
+    public R login(@RequestBody SocialUser socialUser){
+
+        MemberEntity memberEntity = memberService.login(socialUser);
+        if(memberEntity != null){
+            return R.ok().setData(memberEntity);
+        }else {
+            return R.error(ExceptionCode.SOCIALUSER_LOGIN_ERROR.getCode(), ExceptionCode.SOCIALUSER_LOGIN_ERROR.getMsg());
+        }
+    }
+
+
+    @PostMapping("/register")
+    public R register(@RequestBody MemberRegisterVo memberRegisterVo){
+        try {
+            memberService.register(memberRegisterVo);
+        } catch (PhoneExistException e) {
+            return R.error(ExceptionCode.PHONE_EXIST_EXCEPTION.getCode(), ExceptionCode.PHONE_EXIST_EXCEPTION.getMsg());
+        } catch (UserNameExistException e) {
+            return R.error(ExceptionCode.USER_EXIST_EXCEPTION.getCode(), ExceptionCode.USER_EXIST_EXCEPTION.getMsg());
+        }
+        return R.ok();
+    }
 }

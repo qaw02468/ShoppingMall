@@ -87,8 +87,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
 
     @Caching(evict = {
-            @CacheEvict(value = "category",key = "'getLevel1Categories'"),
-            @CacheEvict(value = "category",key = "'getCateLogJson'")
+            @CacheEvict(value = "category", key = "'getLevel1Categories'"),
+            @CacheEvict(value = "category", key = "'getCateLogJson'")
     })
     @Override
     public void updateCascade(CategoryEntity category) {
@@ -134,6 +134,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
                     return result;
                 }));
     }
+
     private List<CategoryEntity> getParent_cid(List<CategoryEntity> selectList, Long parentCid) {
         return selectList.stream()
                 .filter(o -> o.getParentCid().equals(parentCid))

@@ -18,7 +18,7 @@
     <update id="updateSpuStatus">
         UPDATE `product_spu_info`
         SET publish_status=#{code},
-            update_time=NOW()
+        update_time=NOW()
         WHERE id = #{spuId}
     </update>
 

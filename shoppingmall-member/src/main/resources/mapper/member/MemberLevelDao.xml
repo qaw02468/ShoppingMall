@@ -16,6 +16,9 @@
         <result property="priviledgeBirthday" column="priviledge_birthday"/>
         <result property="note" column="note"/>
     </resultMap>
+    <select id="getDefaultLevel" resultType="tw.yu.shoppingmall.member.entity.MemberLevelEntity">
+        SELECT * FROM `user_member_level` WHERE default_status =1
+    </select>
 
 
 </mapper>

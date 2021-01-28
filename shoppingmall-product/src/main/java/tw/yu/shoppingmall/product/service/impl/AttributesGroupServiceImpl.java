@@ -82,7 +82,7 @@ public class AttributesGroupServiceImpl extends ServiceImpl<AttributesGroupDao, 
     public List<SkuItemSaleAttrGroupVo> getAttributeGroupWithAttributeBySpuId(Long spuId, Long catalogId) {
 
         AttributesGroupDao baseMapper = this.baseMapper;
-        List<SkuItemSaleAttrGroupVo> vos = baseMapper.getAttributeGroupWithAttributeBySpuId(spuId,catalogId);
+        List<SkuItemSaleAttrGroupVo> vos = baseMapper.getAttributeGroupWithAttributeBySpuId(spuId, catalogId);
 
         return vos;
     }

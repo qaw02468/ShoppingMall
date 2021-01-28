@@ -168,15 +168,16 @@ public class MallSearchServiceImpl implements MallSearchService {
             result.setNavs(navVos);
         }
 
-        if(Param.getBrandId() != null && Param.getBrandId().size() > 0){
+        if (Param.getBrandId() != null && Param.getBrandId().size() > 0) {
             List<SearchResult.NavVo> navs = result.getNavs();
             SearchResult.NavVo navVo = new SearchResult.NavVo();
             navVo.setName("品牌");
 
             R r = productFeign.brandInfo(Param.getBrandId());
-            if(r.getCode() == 0){
+            if (r.getCode() == 0) {
                 String json = JSON.toJSONString(r.get("data"));
-                List<BrandVo> brands = JSON.parseObject(json, new TypeReference<List<BrandVo>>() {});
+                List<BrandVo> brands = JSON.parseObject(json, new TypeReference<List<BrandVo>>() {
+                });
                 StringBuffer buffer = new StringBuffer();
                 String replace = "";
 

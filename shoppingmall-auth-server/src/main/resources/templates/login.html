@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/login/JD_sass/JD1.css"/>
+    <script src="/static/login/JD_js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <title>shoppingmall</title>
+</head>
+<body>
+<!--頂部logo-->
+<header>
+    <a href="http://shoppingmall.com"><img src="/static/login/JD_img/logo.jpg"/></a>
+    <p>歡迎登錄</p>
+    <div class="top-1">
+        <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_06.png"/><span>登錄頁面,調查問卷</span>
+    </div>
+</header>
+
+<div class="top-2">
+    <div class="top-2a">
+        <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_11.png"/>
+        <p>依據《網絡安全法》，為保障您的帳戶安全和正常使用，請盡快完成手機號驗證！新版《<span>Yu商城隱私政策</span>》已上線，將更有利於保護您的個人隱私。</p>
+    </div>
+</div>
+
+<!--大圖-->
+<div class="top-3">
+    <div class="img_1">
+    </div>
+    <div id="sign">
+        <div class="si_top">
+            <p>
+                <span>Yu商城不會以任何理由要求您轉帳匯款，謹防詐騙。</span>
+            </p>
+        </div>
+        <div class="si_cen">
+            <h2 class="act btn1">掃碼登錄</h2>
+            <span>|</span>
+            <h2 class="btn1">帳戶登錄</h2>
+        </div>
+        <div class="si_bom tab">
+            <img src="/static/login/JD_img/show.png" class="bom_1"/>
+            <a href="/static/login/#"><img src="/static/login/JD_img/phone-orange.png" class="bom_2"/></a>
+            <h6>打開<span class="red">手機Yu商城</span> 掃描二維碼</h6>
+            <p>
+                <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_15.png"/>
+                <span><a href="/static/login/#">免輸入</a></span>
+                <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_17.png"/>
+                <span><a href="/static/login/#">更快</a></span>
+                <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_19.png"/>
+                <span><a href="/static/login/#">更安全</a></span>
+            </p>
+        </div>
+        <div class="si_bom1 tab" style="display: none;">
+            <div class="error">
+                <div></div>
+                請輸入帳戶名和密碼
+            </div>
+            <form action="/login" method="post">
+                <div style="color: red"
+                     th:text="${errors!=null? (#maps.containsKey(errors, 'msg')?errors.msg:''):''}"></div>
+                <ul>
+                    <li class="top_1">
+                        <img src="/static/login/JD_img/user_03.png" class="err_img1"/>
+                        <input type="text" name="account" placeholder=" 郵箱/用戶名/已驗證手機" class="user"/>
+                    </li>
+                    <li>
+                        <img src="/static/login/JD_img/user_06.png" class="err_img2"/>
+                        <input type="password" name="password" placeholder=" 密碼" class="password"/>
+                    </li>
+                    <li class="bri">
+                        <a href="/static/login/">忘記密碼</a>
+                    </li>
+                    <li class="ent">
+                        <button class="btn2" type="submit"><a>登 &nbsp; &nbsp;錄</a></button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="si_out">
+            <ul>
+                <li>
+                    <a href="https://accounts.google.com/o/oauth2/auth?client_id=19631340497-3p04c6i7p37jm10qookn6ah8fvahmfcd.apps.googleusercontent.com&redirect_uri=http://auth.shoppingmall.com/oauth2.0/google/success&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email">
+                        <span>Google登入<span>
+                    </a>
+                </li>
+            </ul>
+            <h5 class="rig">
+                <img src="/static/login/JD_img/4de5019d2404d347897dee637895d02b_25.png"/>
+                <span><a
+                        href="http://auth.shoppingmall.com/register.html">立即註冊</a></span>
+            </h5>
+        </div>
+    </div>
+</div>
+
+
+<!--底部-->
+<footer>
+    <ul>
+        <li><a href="/static/login/#">關於我們</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">聯系我們</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">人才招聘</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">商家入駐</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">廣告服務</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">手機Yu商城</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">友情鏈接</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">銷售聯盟</a></li>
+        <li class="little">|</li>
+        R
+        <li><a href="/static/login/#">Yu商城社區</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">Yu商城公益</a></li>
+        <li class="little">|</li>
+        <li><a href="/static/login/#">English Site</a></li>
+    </ul>
+    <span>Copyright &copy; 2021-2021 Yu商城shoppingmall.com 版權所有</span>
+</footer>
+
+</body>
+<script type="text/javascript">
+    var alDiv = document.getElementsByClassName('tab');
+    var alBtn = document.getElementsByTagName('h2');
+    alDiv[0].style.display = 'block';
+    var act = alBtn[0]
+    for (var i = 0; i < alBtn.length; i++) {
+        alBtn[i].indent = i;
+        alBtn[i].onclick = function () {
+            act.className = '';
+            alDiv[act.indent].style.display = 'none';
+            this.className = 'act'
+            alDiv[this.indent].style.display = 'block'
+            act = this
+        }
+    }
+
+    var btn2 = document.getElementsByClassName('btn2')[0];
+    var user = document.getElementsByClassName('user')[0];
+    var pass = document.getElementsByClassName('password')[0];
+    var err = document.getElementsByClassName('error')[0];
+    var err_img1 = document.getElementsByClassName('err_img1')[0];
+    var err_img2 = document.getElementsByClassName('err_img2')[0];
+
+    btn2.onclick = function () {
+        if (user.value == '' || pass.value == '') {
+            err.style.display = 'block';
+            user.style.border = '1px solid red';
+            pass.style.border = '1px solid red';
+            err_img1.src = 'JD_img/img11.png';
+            err_img2.src = 'JD_img/img22.png';
+        } else {
+            var a = document.getElementsByClassName("a")[0].href = "http://www.baidu.com";
+        }
+        user.onfocus = function () {
+            err_img1.src = 'JD_img/grow1.png';
+            user.style.border = '1px solid #999';
+        }
+        pass.onfocus = function () {
+            err_img2.src = 'JD_img/grow2.png';
+            pass.style.border = '1px solid #999';
+        }
+        user.onblur = function () {
+            err_img1.src = 'JD_img/img11.png';
+            user.style.border = '1px solid red';
+        }
+        pass.onblur = function () {
+            err_img2.src = 'JD_img/img22.png';
+            pass.style.border = '1px solid red';
+        }
+    }
+
+</script>
+</html>

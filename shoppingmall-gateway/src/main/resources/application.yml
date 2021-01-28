@@ -53,6 +53,10 @@ spring:
           predicates:
             - Host=search.shoppingmall.com
 
+        - id: shoppingmall-auth-router
+          uri: lb://shoppingmall-auth-server
+          predicates:
+            - Host=auth.shoppingmall.com
 
 
 
