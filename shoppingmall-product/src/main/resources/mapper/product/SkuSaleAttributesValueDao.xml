@@ -22,16 +22,21 @@
         </collection>
     </resultMap>
     <select id="getSaleAttrsBySpuId" resultMap="SkuItemSaleAttrVo">
-        SELECT ssav.attr_id attr_id,
-        ssav.attr_name attr_name,
-        ssav.attr_value attr_values,
-        group_concat(distinct info.sku_id) sku_ids
+        SELECT ssav.attr_id                       attr_id,
+               ssav.attr_name                     attr_name,
+               ssav.attr_value                    attr_values,
+               group_concat(distinct info.sku_id) sku_ids
         FROM `product_sku_info` info
-        LEFT JOIN `product_sku_sale_attributes_value` ssav
-        ON ssav.sku_id = info.`sku_id`
+                 LEFT JOIN `product_sku_sale_attributes_value` ssav
+                           ON ssav.sku_id = info.`sku_id`
         where info.spu_id = #{spuId}
         GROUP BY ssav.attr_id, ssav.attr_name, ssav.attr_value
 
+    </select>
+    <select id="getSkuSaleAttrValuesAsStringList" resultType="java.lang.String">
+        SELECT CONCAT(attr_name, ":", attr_value)
+        FROM `product_sku_sale_attributes_value`
+        WHERE sku_id = #{skuId};
     </select>
 
 

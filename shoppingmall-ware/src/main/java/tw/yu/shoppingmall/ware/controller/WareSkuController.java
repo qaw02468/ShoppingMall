@@ -6,7 +6,7 @@ import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.ware.entity.WareSkuEntity;
 import tw.yu.shoppingmall.ware.service.WareSkuService;
-import tw.yu.common.to.SkuHasStockVO;
+import tw.yu.common.to.SkuHasStockVo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +29,7 @@ public class WareSkuController {
 
     @PostMapping("/hasstock")
     public R getSkusHasStock(@RequestBody List<Long> skuIds) {
-        List<SkuHasStockVO> vos = wareSkuService.getSkuHasStock(skuIds);
+        List<SkuHasStockVo> vos = wareSkuService.getSkuHasStock(skuIds);
         return R.ok().put("data", vos);
     }
 

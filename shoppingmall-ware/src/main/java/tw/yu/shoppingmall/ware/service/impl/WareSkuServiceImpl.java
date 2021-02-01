@@ -13,7 +13,7 @@ import tw.yu.shoppingmall.ware.dao.WareSkuDao;
 import tw.yu.shoppingmall.ware.entity.WareSkuEntity;
 import tw.yu.shoppingmall.ware.feign.ProductFeign;
 import tw.yu.shoppingmall.ware.service.WareSkuService;
-import tw.yu.common.to.SkuHasStockVO;
+import tw.yu.common.to.SkuHasStockVo;
 
 import java.util.List;
 import java.util.Map;
@@ -74,9 +74,9 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
     }
 
     @Override
-    public List<SkuHasStockVO> getSkuHasStock(List<Long> skuIds) {
+    public List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds) {
         return skuIds.stream().map(skuId -> {
-            SkuHasStockVO vo = new SkuHasStockVO();
+            SkuHasStockVo vo = new SkuHasStockVo();
 
             Long count = baseMapper.getSkuStock(skuId);
             vo.setSkuId(skuId);

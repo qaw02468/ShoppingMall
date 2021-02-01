@@ -1,0 +1,18 @@
+
+spring:
+  application:
+    name: shoppingmall-cart
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1
+  redis:
+    host: 192.168.157.129
+server:
+  port: 40000
+
+shoppingmall:
+  thread:
+    core-size: 20
+    max-size: 200
+    keep-alive-time: 10

@@ -8,6 +8,7 @@ import tw.yu.shoppingmall.product.entity.SkuSaleAttributesValueEntity;
 import tw.yu.shoppingmall.product.service.SkuSaleAttributesValueService;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,6 +24,12 @@ import java.util.Map;
 public class SkuSaleAttributesValueController {
     @Autowired
     private SkuSaleAttributesValueService skuSaleAttributesValueService;
+
+    @GetMapping("/stringlist/{skuId}")
+    public List<String> getSkuSaleAttrValues(@PathVariable("skuId") Long skuId){
+
+        return skuSaleAttributesValueService.getSkuSaleAttrValuesAsStringList(skuId);
+    }
 
     /**
      * 列表

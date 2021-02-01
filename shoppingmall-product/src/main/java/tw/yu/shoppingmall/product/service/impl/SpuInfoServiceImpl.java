@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tw.yu.common.constant.ProductConstant;
-import tw.yu.common.to.SkuHasStockVO;
+import tw.yu.common.to.SkuHasStockVo;
 import tw.yu.common.to.SkuReductionTo;
 import tw.yu.common.to.SpuBoundTo;
 import tw.yu.common.to.es.SkuEsModel;
@@ -255,10 +255,10 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         try {
             R r = wareFeign.getSkusHasStock(skuIdList);
             String json = JSON.toJSONString(r.get("data"));
-            List<SkuHasStockVO> skuHasStockVOS = (List<SkuHasStockVO>) JSON.parseObject(json, new TypeReference<SkuHasStockVO>() {
+            List<SkuHasStockVo> skuHasStockVos = (List<SkuHasStockVo>) JSON.parseObject(json, new TypeReference<SkuHasStockVo>() {
             });
-            stockMap = skuHasStockVOS.stream()
-                    .collect(Collectors.toMap(SkuHasStockVO::getSkuId, SkuHasStockVO::getHasStock));
+            stockMap = skuHasStockVos.stream()
+                    .collect(Collectors.toMap(SkuHasStockVo::getSkuId, SkuHasStockVo::getHasStock));
         } catch (Exception e) {
             log.error("庫存伺服器查詢異常:", e);
         }

@@ -3,7 +3,7 @@ package tw.yu.shoppingmall.ware.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.shoppingmall.ware.entity.WareSkuEntity;
-import tw.yu.common.to.SkuHasStockVO;
+import tw.yu.common.to.SkuHasStockVo;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +21,6 @@ public interface WareSkuService extends IService<WareSkuEntity> {
 
     void addStock(Long skuId, Long wareId, Integer skuNum);
 
-    List<SkuHasStockVO> getSkuHasStock(List<Long> skuIds);
+    List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds);
 }
 

@@ -8,6 +8,7 @@ import tw.yu.shoppingmall.product.entity.ProductAttributesValueEntity;
 import tw.yu.shoppingmall.product.service.ProductAttributesValueService;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
