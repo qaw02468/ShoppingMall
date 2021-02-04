@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  * @date 2020-12-25 22:59:28
  */
 @Data
-@TableName("order_info")
+@TableName("shoppingmall_order_manage.order_info")
 public class InfoEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 

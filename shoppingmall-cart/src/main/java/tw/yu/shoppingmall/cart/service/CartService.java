@@ -3,6 +3,7 @@ package tw.yu.shoppingmall.cart.service;
 import tw.yu.shoppingmall.cart.vo.Cart;
 import tw.yu.shoppingmall.cart.vo.CartItem;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -22,4 +23,7 @@ public interface CartService {
     void deleteItem(Long skuId);
 
     void changeItemCount(Long skuId, Integer num);
+
+    List<CartItem> getUserCartItems();
+
 }

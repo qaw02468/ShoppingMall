@@ -6,6 +6,7 @@ import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.ware.entity.WareInfoEntity;
 import tw.yu.shoppingmall.ware.service.WareInfoService;
+import tw.yu.shoppingmall.ware.vo.FareVo;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -24,6 +25,11 @@ public class WareInfoController {
     @Autowired
     private WareInfoService wareInfoService;
 
+    @GetMapping("/fare")
+    public R getFare(@RequestParam("addrId") Long addrId) {
+        FareVo fare = wareInfoService.getFare(addrId);
+        return R.ok().setData(fare);
+    }
 
     /**
      * 列表

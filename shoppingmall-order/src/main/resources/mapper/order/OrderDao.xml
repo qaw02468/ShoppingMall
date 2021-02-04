@@ -49,5 +49,25 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
-
+    <insert id="save">
+        INSERT INTO `order` (member_id, order_sn, create_time, member_username, total_amount, pay_amount,
+                             freight_amount,
+                             promotion_amount, integration_amount, coupon_amount, status, auto_confirm_day, integration,
+                             growth, bill_receiver_email, receiver_name, receiver_phone, receiver_province,
+                             receiver_detail_address, delete_status, delivery_time, receive_time, comment_time,
+                             modify_time)
+        VALUES (#{orderEntity.memberId}, #{orderEntity.orderSn}, #{orderEntity.createTime},
+                #{orderEntity.memberUsername}, #{orderEntity.totalAmount}, #{orderEntity.payAmount},
+                #{orderEntity.freightAmount}, #{orderEntity.promotionAmount}, #{orderEntity.integrationAmount},
+                #{orderEntity.couponAmount}, #{orderEntity.status}, #{orderEntity.autoConfirmDay},
+                #{orderEntity.integration}, #{orderEntity.growth}, #{orderEntity.billReceiverEmail},
+                #{orderEntity.receiverName}, #{orderEntity.receiverPhone}, #{orderEntity.receiverProvince},
+                #{orderEntity.receiverDetailAddress}, #{orderEntity.deleteStatus}, #{orderEntity.deliveryTime},
+                #{orderEntity.receiveTime}, #{orderEntity.commentTime}, #{orderEntity.modifyTime})
+    </insert>
+    <update id="updateOrderStatus">
+        UPDATE `order`
+        SET `status` = #{code}
+        WHERE order_sn = #{orderSn}
+    </update>
 </mapper>

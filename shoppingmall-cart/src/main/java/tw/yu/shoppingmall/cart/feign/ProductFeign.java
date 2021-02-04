@@ -17,6 +17,9 @@ public interface ProductFeign {
     @RequestMapping("/product/skuinfo/info/{skuId}")
     public R skuInfo(@PathVariable("skuId") Long skuId);
 
+    @GetMapping("/product/skuinfo/{skuId}/price")
+    R getPrice(@PathVariable("skuId") Long skuId);
+
     @GetMapping("/product/skusaleattributesvalue/stringlist/{skuId}")
     public List<String> getSkuSaleAttrValues(@PathVariable("skuId") Long skuId);
 }

@@ -2,7 +2,9 @@ package tw.yu.shoppingmall.ware.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -14,6 +16,8 @@ import java.io.Serializable;
  * @date 2021-01-07 15:22:00
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("shoppingmall_ware_manage.ware_order_task_detail")
 public class WareOrderTaskDetailEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -39,5 +43,6 @@ public class WareOrderTaskDetailEntity implements Serializable {
      * 工作單id
      */
     private Long taskId;
-
+    private Long wareId;
+    private Integer lockStatus;
 }

@@ -1,12 +1,16 @@
 package tw.yu.shoppingmall.ware.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tw.yu.common.exception.ExceptionCode;
+import tw.yu.common.exception.NotStockException;
+import tw.yu.common.to.SkuHasStockVo;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.ware.entity.WareSkuEntity;
 import tw.yu.shoppingmall.ware.service.WareSkuService;
-import tw.yu.common.to.SkuHasStockVo;
+import tw.yu.shoppingmall.ware.vo.WareSkuLockVo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,10 +26,21 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("ware/waresku")
+@Slf4j
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
 
+    @PostMapping("/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVo vo) {
+        try {
+            wareSkuService.orderLockStock(vo);
+            return R.ok();
+        } catch (NotStockException e) {
+            log.warn("\n" + e.getMessage());
+        }
+        return R.error(ExceptionCode.NOT_STOCK_EXCEPTION.getCode(), ExceptionCode.NOT_STOCK_EXCEPTION.getMsg());
+    }
 
     @PostMapping("/hasstock")
     public R getSkusHasStock(@RequestBody List<Long> skuIds) {

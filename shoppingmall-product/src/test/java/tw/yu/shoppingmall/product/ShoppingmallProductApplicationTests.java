@@ -12,8 +12,10 @@ import tw.yu.shoppingmall.product.dao.SkuSaleAttributesValueDao;
 import tw.yu.shoppingmall.product.entity.BrandEntity;
 import tw.yu.shoppingmall.product.service.BrandService;
 import tw.yu.shoppingmall.product.service.SkuInfoService;
-import tw.yu.shoppingmall.product.vo.SkuItemVo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -42,8 +44,8 @@ class ShoppingmallProductApplicationTests {
     }
 
     @Test
-    public void test() throws ExecutionException, InterruptedException {
-        SkuItemVo item = skuInfoService.item(1L);
-        System.out.println(item);
+    public void test() throws ExecutionException, InterruptedException, ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = simpleDateFormat.format(new Date());
     }
 }

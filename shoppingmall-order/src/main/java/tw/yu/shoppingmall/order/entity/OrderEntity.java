@@ -1,12 +1,16 @@
 package tw.yu.shoppingmall.order.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 訂單
@@ -16,7 +20,7 @@ import java.util.Date;
  * @date 2020-12-25 22:59:28
  */
 @Data
-@TableName("order")
+@TableName("shoppingmall_order_manage.order")
 public class OrderEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -172,22 +176,34 @@ public class OrderEntity implements Serializable {
     /**
      * 支付時間
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date paymentTime;
     /**
      * 發貨時間
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date deliveryTime;
     /**
      * 確認收貨時間
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date receiveTime;
     /**
      * 評價時間
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date commentTime;
     /**
      * 修改時間
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date modifyTime;
 
+    @TableField(exist = false)
+    private List<InfoEntity> itemEntities;
 }

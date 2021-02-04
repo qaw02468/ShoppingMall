@@ -8,6 +8,7 @@ import tw.yu.shoppingmall.member.entity.MemberReceiveAddressEntity;
 import tw.yu.shoppingmall.member.service.MemberReceiveAddressService;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,6 +24,12 @@ import java.util.Map;
 public class MemberReceiveAddressController {
     @Autowired
     private MemberReceiveAddressService memberReceiveAddressService;
+
+
+    @GetMapping("/{memberId}/addresses")
+    public List<MemberReceiveAddressEntity> getAddress(@PathVariable("memberId") Long memberId) {
+        return memberReceiveAddressService.getAddress(memberId);
+    }
 
     /**
      * 列表

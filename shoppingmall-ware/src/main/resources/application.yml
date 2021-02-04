@@ -3,10 +3,12 @@ server:
 
 spring:
   datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.157.129:3306/shoppingmall_ware_manage
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      username: root
+      password: root
+      url: jdbc:mysql://192.168.157.129:3306/shoppingmall_ware_manage
   cloud:
     nacos:
       discovery:
@@ -15,7 +17,13 @@ spring:
     name: shoppingmall-ware
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-
+  rabbitmq:
+    host: 192.168.157.129
+    port: 5672
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:
@@ -25,3 +33,12 @@ mybatis-plus:
 logging:
   level:
     tw.yu.shoppingmall: debug
+
+myRabbitmq:
+  MQConfig:
+    queues: stock.release.stock.queue
+    delayQueue: stock.delay.queue
+    eventExchange: stock-event-exchange
+    routingKey: stock.locked
+    letterRoutingKey: stock.release
+    ttl: 900000

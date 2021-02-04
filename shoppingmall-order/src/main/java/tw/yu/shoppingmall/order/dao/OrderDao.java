@@ -2,6 +2,7 @@ package tw.yu.shoppingmall.order.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import tw.yu.shoppingmall.order.entity.OrderEntity;
 
 /**
@@ -14,4 +15,7 @@ import tw.yu.shoppingmall.order.entity.OrderEntity;
 @Mapper
 public interface OrderDao extends BaseMapper<OrderEntity> {
 
+    void save(@Param("orderEntity") OrderEntity orderEntity);
+
+    void updateOrderStatus(@Param("orderSn") String orderSn, @Param("code") Integer code);
 }

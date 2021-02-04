@@ -13,6 +13,10 @@ spring:
         server-addr: 127.0.0.1:8848
   application:
     name: shoppingmall-member
+  redis:
+    host: 192.168.157.129
+  session:
+    store-type: redis
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml

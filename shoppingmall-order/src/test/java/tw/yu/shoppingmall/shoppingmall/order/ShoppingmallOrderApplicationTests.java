@@ -8,6 +8,7 @@ class ShoppingmallOrderApplicationTests {
 
     @Test
     void contextLoads() {
+
     }
 
 }

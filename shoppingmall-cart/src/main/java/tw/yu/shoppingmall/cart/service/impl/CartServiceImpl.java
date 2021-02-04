@@ -17,6 +17,7 @@ import tw.yu.shoppingmall.cart.vo.CartItem;
 import tw.yu.shoppingmall.cart.vo.SkuInfoVo;
 import tw.yu.shoppingmall.cart.vo.UserInfoTo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -162,5 +163,29 @@ public class CartServiceImpl implements CartService {
         cartItem.setCount(num);
         BoundHashOperations<String, Object, Object> cartOps = getCartOps();
         cartOps.put(skuId.toString(), JSON.toJSONString(cartItem));
+    }
+
+    @Override
+    public List<CartItem> getUserCartItems() {
+        UserInfoTo userInfoTo = CartInterceptor.threadLocal.get();
+        if (userInfoTo.getUserId() == null) {
+            return null;
+        } else {
+            String cartKey = CART_PREFIX + userInfoTo.getUserId();
+            List<CartItem> cartItems = getCartItems(cartKey);
+
+            List<CartItem> collect = cartItems.stream()
+                    .filter(CartItem::getCheck)
+                    .peek(item -> {
+                        try {
+                            R r = productFeign.getPrice(item.getSkuId());
+                            String price = (String) r.get("data");
+                            item.setPrice(new BigDecimal(price));
+                        } catch (Exception e) {
+                            log.warn("遠程查詢商品價格出錯 [商品服務未啟動]");
+                        }
+                    }).collect(Collectors.toList());
+            return collect;
+        }
     }
 }
