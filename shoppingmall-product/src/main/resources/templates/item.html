@@ -47,7 +47,7 @@
                     <a class="aa" style="width: 100px">[[${session.loginUser.username}]]</a>
                 </li>
                 <li style="border: 0;" th:if="${session.loginUser} ==null">
-                    <a href="http://auth.shoppingmall.com/login.html" class="aa">你好，請登錄 </a>
+                    <a href="http://auth.shoppingmall.com/login.html" class="aa">你好，請登入 </a>
                 </li>
                 <li th:if="${session.loginUser} ==null">
                     <a href="http://auth.shoppingmall.com/register.html" style="color: red;">免費注冊</a> |
@@ -381,13 +381,13 @@
                     </a>
 
                     <span class="contact-sp">
-								<span class="contact-sp1">
-								Yu
-							</span>
-							<span class="contact-sp2">
-								自營
-							    </span>
-							</span>
+                                    <span class="contact-sp1">
+                                    Yu
+                                </span>
+                                <span class="contact-sp2">
+                                    自營
+                                    </span>
+                                </span>
                 </li>
                 <li>
                     <a href="/static/item/#">
@@ -460,13 +460,13 @@
                 <div class="boxx-one">
                     <ul>
                         <li>
-									<span>
-										<img src="/static/item/img/b769782fe4ecca40913ad375a71cb92d.png" alt=""/>關注
-									</span>
+                                        <span>
+                                            <img src="/static/item/img/b769782fe4ecca40913ad375a71cb92d.png" alt=""/>關注
+                                        </span>
                             <span>
-										<img src="/static/item/img/9224fcea62bfff479a6712ba3a6b47cc.png" alt=""/>
-										對比
-									</span>
+                                            <img src="/static/item/img/9224fcea62bfff479a6712ba3a6b47cc.png" alt=""/>
+                                            對比
+                                        </span>
                         </li>
                         <li>
 
@@ -496,7 +496,7 @@
                                 <img src="/static/item/img/36860afb69afa241beeb33ae86678093.png"/> 預約剩余
                                 <span id="timer">
 
-									</span>
+                                        </span>
                             </li>
                         </ul>
                     </div>
@@ -508,9 +508,11 @@
                             <span>$</span>
                             <span th:text="${#numbers.formatDecimal(item.info.price,3,0)}">4499.00</span>
                         </li>
-                        <li>
-                            預約享資格
+                        <li style="color: red" th:if="${item.seckillInfoVo!=null}">
+                            <span th:if="${#dates.createNow().getTime() < item.seckillInfoVo.startTime}">商品將會在 [[${#dates.format(new java.util.Date(item.seckillInfoVo.startTime),"yyyy-MM-dd HH:mm:ss")}]] 進行秒殺</span>
+                            <span th:if="${#dates.createNow().getTime() >= item.seckillInfoVo.startTime && #dates.createNow().getTime() <= item.seckillInfoVo.endTime}">秒殺價： [[${#numbers.formatDecimal(item.seckillInfoVo.seckillPrice,1,0)}]]</span>
                         </li>
+                        >
                         <li>
                             <a href="/static/item/">
                                 預約說明
@@ -626,16 +628,23 @@
                             </div>
 
                         </div>
+                        <div class="box-btns-two"
+                             th:if="${item.seckillInfoVo != null && (#dates.createNow().getTime() >= item.seckillInfoVo.startTime && #dates.createNow().getTime() <= item.seckillInfoVo.endTime)}">
+                            <a id="secKillA"
+                               th:attr="skuId=${item.info.skuId},sessionId=${item.seckillInfoVo.promotionSessionId},code=${item.seckillInfoVo.randomCode}">
+                                立即搶購
+                            </a>
+                        </div>
+                        <div class="box-btns-two"
+                             th:if="${item.seckillInfoVo == null || (#dates.createNow().getTime() < item.seckillInfoVo.startTime || #dates.createNow().getTime() > item.seckillInfoVo.endTime)}">
+                            <a href="#" id="addToCartA" th:attr="skuId=${item.info.skuId}">
+                                加入購物車
+                            </a>
+                        </div>
+                        <div class="box-btns-three">
+                            <img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt=""/> 分享
+                        </div>
                     </div>
-                    <div class="box-btns-two">
-                        <a href="#" id="addToCartA" th:attr="skuId=${item.info.skuId}">
-                            加入購物車
-                        </a>
-                    </div>
-                    <div class="box-btns-three">
-                        <img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt=""/> 分享
-                    </div>
-                </div>
 
                 <div class="box-footer-zo">
                     <div class="box-footer clear">
@@ -933,10 +942,10 @@
                             <!--廠家服務-->
                             <div class="changJia">
                                 <div class="lianBao">
-				<span class="oImg">
-					<img src="/static/item/img/2017.jpg" alt=""/>
-					<h3>廠家服務</h3>
-				</span>
+                    <span class="oImg">
+                        <img src="/static/item/img/2017.jpg" alt=""/>
+                        <h3>廠家服務</h3>
+                    </span>
                                     <div class="wenZi">
                                         本產品全國聯保，享受三包服務，質保期為：一年保<br/>
                                         如因質量問題或故障，憑廠商維修中心或特約維修點的質量檢測證明，享受7日內退貨，15日內換貨，15日以上在保質期內享受免費保修等安保服務！<br/>
@@ -945,10 +954,10 @@
                                     </div>
                                 </div>
                                 <div class="lianBao oCn">
-				<span class="oImg">
-					<img src="/static/item/img/2017.jpg" alt=""/>
-					<h3>Yu承諾</h3>
-				</span>
+                    <span class="oImg">
+                        <img src="/static/item/img/2017.jpg" alt=""/>
+                        <h3>Yu承諾</h3>
+                    </span>
                                     <div class="wenZi">
                                         本產品全國聯保，享受三包服務，質保期為：一年保<br/>
                                         如因質量問題或故障，憑廠商維修中心或特約維修點的質量檢測證明，享受7日內退貨，15日內換貨，15日以上在保質期內享受免費保修等安保服務！<br/>
@@ -958,19 +967,19 @@
                                 </div>
 
                                 <div class="lianBao ">
-				<span class="oImg">
-					<img src="/static/item/img/2017.jpg" alt=""/>
-					<h3>正品行貨</h3>
-				</span>
+                    <span class="oImg">
+                        <img src="/static/item/img/2017.jpg" alt=""/>
+                        <h3>正品行貨</h3>
+                    </span>
                                     <div class="wenZi hangHuo">
                                         Yu商城向您保證所售商品均為正品行貨，Yu自營商品開具機打发票或電子发票。
                                     </div>
                                 </div>
                                 <div class="lianBao quanGuo">
-				<span class="oImg">
-					<img src="/static/item/img/2017-1.jpg" alt=""/>
-					<h3>全國聯保</h3>
-				</span>
+                    <span class="oImg">
+                        <img src="/static/item/img/2017-1.jpg" alt=""/>
+                        <h3>全國聯保</h3>
+                    </span>
                                     <div class="wenZi">
                                         憑質保證書及Yu商城发票，可享受全國聯保服務（奢侈品、鐘表除外；奢侈品、鐘表由Yu聯系保修，享受法定三包售後服務），與您親臨商場選購的商品享受相同的質量保證。Yu商城還為您提供具有競爭力的商品價格和運費政策，請您放心購買！
                                         <br/>
@@ -1308,12 +1317,23 @@
         $(".sku_attr_value").parent().css({"border": "solid 1px #CCC"});
         $("a[class='sku_attr_value checked']").parent().css({"border": "solid 1px red"});
     })
-    $("#addToCartA").click(function (){
+    $("#addToCartA").click(function () {
         var num = $("#numInput").val();
         var skuId = $(this).attr("skuId");
-        location.href="http://cart.shoppingmall.com/addToCart?skuId="+skuId+"&num="+num;
+        location.href = "http://cart.shoppingmall.com/addToCart?skuId=" + skuId + "&num=" + num;
         return false;
     });
+    $("#secKillA").click(function () {
+        var isLogin = [[${session.loginUser != null}]]
+        if (isLogin) {
+            var killId = $(this).attr("sessionid") + "-" + $(this).attr("skuid");
+            var num = $("#numInput").val();
+            location.href = "http://seckill.shoppingmall.com/kill?killId=" + killId + "&key=" + $(this).attr("code") + "&num=" + num;
+        } else {
+
+        }
+        return false;
+    })
 </script>
 
 </html>

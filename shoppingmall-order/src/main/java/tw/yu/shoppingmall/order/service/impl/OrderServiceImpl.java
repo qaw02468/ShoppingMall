@@ -22,6 +22,7 @@ import tw.yu.common.enume.OrderStatusEnum;
 import tw.yu.common.exception.NotStockException;
 import tw.yu.common.to.MemberResponseVo;
 import tw.yu.common.to.mq.OrderTo;
+import tw.yu.common.to.mq.SecKillOrderTo;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.Query;
 import tw.yu.common.utils.R;
@@ -240,6 +241,41 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     public String handlePayResult(String orderSn) {
         this.baseMapper.updateOrderStatus(orderSn, OrderStatusEnum.PAYED.getCode());
         return "success";
+    }
+
+    @Override
+    public void createSecKillOrder(SecKillOrderTo secKillOrderTo) {
+        OrderEntity entity = new OrderEntity();
+        entity.setOrderSn(secKillOrderTo.getOrderSn());
+        entity.setMemberId(secKillOrderTo.getMemberId());
+        entity.setCreateTime(new Date());
+        entity.setPayAmount(secKillOrderTo.getSeckillPrice());
+        entity.setTotalAmount(secKillOrderTo.getSeckillPrice());
+        entity.setStatus(OrderStatusEnum.CREATE_NEW.getCode());
+        entity.setPayType(1);
+        BigDecimal price = secKillOrderTo.getSeckillPrice().multiply(new BigDecimal("" + secKillOrderTo.getNum()));
+        entity.setPayAmount(price);
+
+        this.save(entity);
+
+        InfoEntity itemEntity = new InfoEntity();
+        itemEntity.setOrderSn(secKillOrderTo.getOrderSn());
+        itemEntity.setRealAmount(price);
+        itemEntity.setOrderId(entity.getId());
+        itemEntity.setSkuQuantity(secKillOrderTo.getNum());
+        R info = productFeign.getSkuInfoBySkuId(secKillOrderTo.getSkuId());
+        SpuInfoVo spuInfo = info.getData(new TypeReference<SpuInfoVo>() {
+        });
+        itemEntity.setSpuId(spuInfo.getId());
+        itemEntity.setSpuBrand(spuInfo.getBrandId().toString());
+        itemEntity.setSpuName(spuInfo.getSpuName());
+        itemEntity.setCategoryId(spuInfo.getCatalogId());
+        itemEntity.setGiftGrowth(secKillOrderTo.getSeckillPrice().multiply(new BigDecimal(secKillOrderTo.getNum())).intValue());
+        itemEntity.setGiftIntegration(secKillOrderTo.getSeckillPrice().multiply(new BigDecimal(secKillOrderTo.getNum())).intValue());
+        itemEntity.setPromotionAmount(new BigDecimal("0.0"));
+        itemEntity.setCouponAmount(new BigDecimal("0.0"));
+        itemEntity.setIntegrationAmount(new BigDecimal("0.0"));
+        infoService.save(itemEntity);
     }
 
     private void saveOrder(OrderCreateTo order) throws ParseException {

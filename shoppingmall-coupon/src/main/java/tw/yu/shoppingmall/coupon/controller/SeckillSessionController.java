@@ -8,6 +8,7 @@ import tw.yu.shoppingmall.coupon.entity.SeckillSessionEntity;
 import tw.yu.shoppingmall.coupon.service.SeckillSessionService;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -23,6 +24,12 @@ import java.util.Map;
 public class SeckillSessionController {
     @Autowired
     private SeckillSessionService seckillSessionService;
+
+    @GetMapping("/lates3DaySession")
+    public R getLate3DaySession() {
+        List<SeckillSessionEntity> seckillSessionEntities = seckillSessionService.getLate3DaySession();
+        return R.ok().setData(seckillSessionEntities);
+    }
 
     /**
      * 列表

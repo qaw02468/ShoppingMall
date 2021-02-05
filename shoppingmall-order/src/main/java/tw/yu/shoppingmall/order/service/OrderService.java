@@ -1,6 +1,7 @@
 package tw.yu.shoppingmall.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import tw.yu.common.to.mq.SecKillOrderTo;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.shoppingmall.order.entity.OrderEntity;
 import tw.yu.shoppingmall.order.vo.OrderConfirmVo;
@@ -33,5 +34,7 @@ public interface OrderService extends IService<OrderEntity> {
     PageUtils queryPageWithItem(Map<String, Object> params);
 
     String handlePayResult(String orderSn);
+
+    void createSecKillOrder(SecKillOrderTo secKillOrderTo);
 }
 

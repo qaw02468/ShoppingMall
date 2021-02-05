@@ -505,33 +505,7 @@
         <div class="swiper-container swiper_section_second_list_left">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <ul>
-                        <li>
-                            <img src="/static/index/img/section_second_list_img1.jpg" alt="">
-                            <p>花王 (Merries) 妙而舒 紙尿褲 大號 L54片 尿不濕（9-14千克） （日本官方直采） 花王 (Merries) 妙而舒 紙尿褲 大號 L54片
-                                尿不濕（9-14千</p>
-                            <span>$83.9</span><s>$99.9</s>
-                        </li>
-                        <li>
-                            <img src="/static/index/img/section_second_list_img2.jpg" alt="">
-                            <p>華為mate9 4GB+32GB版 月光銀 移動聯通電信4G手機 雙卡</p>
-                            <span>$17.90</span><s>$29.90</s>
-                        </li>
-                        <li>
-                            <img src="/static/index/img/section_second_list_img3.jpg" alt="">
-                            <p>超能 植翠低泡洗衣液（鮮艷亮麗）2kg/袋裝（新老包裝隨機</p>
-                            <span>$20.70</span><s>$44.90</s>
-                        </li>
-                        <li>
-                            <img src="/static/index/img/section_second_list_img4.jpg" alt="">
-                            <p>長城（GreatWall）紅酒 特選5年橡木桶解百納幹紅葡萄酒 整</p>
-                            <span>$399.00</span><s>$599.00</s>
-                        </li>
-                        <li>
-                            <img src="/static/index/img/section_second_list_img5.jpg" alt="">
-                            <p>惠普(HP)暗影精靈2代Pro 15.6英寸遊戲筆記本電腦(i5-7300H</p>
-                            <span>$5999.00</span><s>$6499.00</s>
-                        </li>
+                    <ul id="seckillSkuContent">
                     </ul>
                 </div>
                 <div class="swiper-slide">
@@ -597,6 +571,23 @@
         var keyword = $("#searchText").val()
         window.location.href = "http://search.shoppingmall.com/list.html?keyword=" + keyword;
     }
+
+    function to_href(skuId) {
+        location.href = "http://item.shoppingmall.com/" + skuId + ".html";
+    }
+
+    $.get("http://seckill.shoppingmall.com/currentSeckillSkus", function (resp) {
+        if (resp.data.length > 0) {
+            resp.data.forEach(function (item) {
+                $("<li onclick='to_href(" + item.skuId + ")'></li>")
+                    .append($("<img style='width: 130px; height: 130px;' src='" + item.skuInfoVo.skuDefaultImg + "'/>"))
+                    .append($("<p>" + item.skuInfoVo.skuTitle + "</p>"))
+                    .append($("<span>$" + item.seckillPrice + "</span>"))
+                    .append($("<s>$" + item.skuInfoVo.price + "</s>"))
+                    .appendTo("#seckillSkuContent");
+            })
+        }
+    })
 
 </script>
 <script type="text/javascript" src="/static/index/js/text.js"></script>

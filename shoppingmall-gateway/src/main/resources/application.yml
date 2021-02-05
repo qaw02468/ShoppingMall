@@ -15,6 +15,13 @@ spring:
           filters:
             - RewritePath=/api/(?<segment>.*),/$\{segment}
 
+        - id: coupon_route
+          uri: lb://shoppingmall-coupon
+          predicates:
+            - Path=/api/coupon/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
         - id: third_service_route
           uri: lb://shoppingmall-third-service
           predicates:
@@ -72,3 +79,8 @@ spring:
           uri: lb://shoppingmall-member
           predicates:
             - Host=member.shoppingmall.com
+
+        - id: shoppingmall-seckill-router
+          uri: lb://shoppingmall-seckill
+          predicates:
+            - Host=seckill.shoppingmall.com

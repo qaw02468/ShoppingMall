@@ -1,5 +1,6 @@
 package tw.yu.shoppingmall.product.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -8,11 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tw.yu.common.utils.PageUtils;
 import tw.yu.common.utils.Query;
+import tw.yu.common.utils.R;
 import tw.yu.shoppingmall.product.dao.SkuInfoDao;
 import tw.yu.shoppingmall.product.entity.SkuImagesEntity;
 import tw.yu.shoppingmall.product.entity.SkuInfoEntity;
 import tw.yu.shoppingmall.product.entity.SpuInfoDescEntity;
+import tw.yu.shoppingmall.product.feign.SeckillFeign;
 import tw.yu.shoppingmall.product.service.*;
+import tw.yu.shoppingmall.product.vo.SeckillInfoVo;
 import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrGroupVo;
 import tw.yu.shoppingmall.product.vo.SkuItemSaleAttrVo;
 import tw.yu.shoppingmall.product.vo.SkuItemVo;
@@ -42,6 +46,9 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
     @Autowired
     private ThreadPoolExecutor threadPoolExecutor;
+
+    @Autowired
+    private SeckillFeign seckillFeign;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -140,7 +147,16 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
             skuItemVo.setImages(images);
         }, threadPoolExecutor);
 
-        CompletableFuture.allOf(imageFuture, saleAttrFuture, descFuture, baseAttrFuture).get();
+        CompletableFuture<Void> secKillFuture = CompletableFuture.runAsync(() -> {
+            R skuSeckillInfo = seckillFeign.getSkuSeckillInfo(skuId);
+            if (skuSeckillInfo.getCode() == 0) {
+                SeckillInfoVo seckillInfoVo = skuSeckillInfo.getData(new TypeReference<SeckillInfoVo>() {
+                });
+                skuItemVo.setSeckillInfoVo(seckillInfoVo);
+            }
+        }, threadPoolExecutor);
+
+        CompletableFuture.allOf(imageFuture, saleAttrFuture, descFuture, baseAttrFuture, secKillFuture).get();
         return skuItemVo;
     }
 

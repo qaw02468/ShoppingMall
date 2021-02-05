@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: shoppingmall-seckill
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8333
+        port: 8719
+
+  redis:
+    host: 192.168.157.129
+  session:
+    store-type: redis
+  rabbitmq:
+    host: 192.168.157.129
+    port: 5672
+    virtual-host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+server:
+  port: 25000
